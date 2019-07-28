@@ -1,0 +1,32 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    instanceId: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: ${spring.cloud.client.ip-address}
+    preferIpAddress: true
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${spring.cloud.client.ip-address}:${server.port}/eureka/
+
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+
+spring:
+  application:
+    name: eureka-server
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin
+      password: 1
+
+logging:
+  file: logs/${spring.application.name}-${server.port}.log

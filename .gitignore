@@ -29,4 +29,5 @@ rebel.xml
 dep2.sh
  
 #log
+logs/
 *.log
