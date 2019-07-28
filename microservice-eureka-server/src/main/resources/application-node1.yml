@@ -1,0 +1,11 @@
+#注册中心多节点配置 启动时命令后加参数来启用  --spring.profiles.active=node1
+server:
+  port: 8761
+eureka:
+  client:
+    # #这里要覆盖application的设置，不然会读取application文件导致unavailable-replicas
+    register-with-eureka: true
+    # #这里要覆盖application的设置，不然会读取application文件导致unavailable-replicas
+    fetch-registry: true
+    service-url:
+      defaultZone: http://admin:1@localhost:8762/eureka/
