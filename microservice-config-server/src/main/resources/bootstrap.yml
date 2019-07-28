@@ -1,0 +1,33 @@
+server:
+  port: 8758
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+  client:
+    service-url:
+      defaultZone: http://admin:1@localhost:8761/eureka,http://admin:1@localhost:8762/eureka
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/
+          add-label-locations: false
+  security:
+    basic:
+      enabled: true
+      allowPath: /${spring.application.name}/service/config/*
+    user:
+      name: admin
+      password: 1
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  file: logs/${spring.application.name}-${server.port}.log
